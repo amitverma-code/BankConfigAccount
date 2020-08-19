@@ -33,6 +33,7 @@ public class Account {
         @Column
         private String micrCode;
         @Column
+        @Pattern(regexp="[A-Z]{5}[0-9]{4}[A-Z]{1}",message = "Enter Valid Pan For Example BNZAA2318J")
         @NotEmpty(message = "PAN must not be empty")
         private String pan;
 

@@ -1,5 +1,6 @@
 package com.bank.system.management.service;
 
+import java.util.EmptyStackException;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,10 +25,14 @@ public class AccountService {
 	
 	public void addAccount(Account account){
 		String pan=account.getPan();
-		if(accountRepository.countByaccountNumber(pan)<4)
-		{accountRepository.save(account);}
-		else {
-			System.out.print("maximum");
+		String acc=account.getAccountNumber();
+		if((accountRepository.countByaccountNumber(pan)<4) && (accountRepository.findByaccountNumber(acc)== null))
+		{
+			accountRepository.save(account);
+		}
+		else 
+		{
+			throw new EmptyStackException();
 		}
 	}
 	
